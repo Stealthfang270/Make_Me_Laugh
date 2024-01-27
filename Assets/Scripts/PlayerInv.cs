@@ -13,6 +13,8 @@ public class PlayerInv : MonoBehaviour
     public GameObject ingredient1Prefab;
     public GameObject ingredient2;
     public GameObject ingredient2Prefab;
+    public GameObject recipe;
+    public GameObject recipePrefab;
 
     private void Update()
     {
@@ -26,13 +28,14 @@ public class PlayerInv : MonoBehaviour
                 if (ingredients.Count < 2)
                 {
                     ingredients.Add(ingredientScript.ingredientPrefab);
-                    if(ingredient1Prefab == null)
+                    if (ingredient1Prefab == null)
                     {
                         ingredient1Prefab = Instantiate(ingredients[0]);
                         ingredient1Prefab.transform.parent = ingredient1.transform;
                         ingredient1Prefab.transform.localPosition = Vector3.zero;
                         ingredient1Prefab.transform.rotation = ingredient1.transform.rotation;
-                    } else if (ingredient2Prefab == null)
+                    }
+                    else if (ingredient2Prefab == null)
                     {
                         ingredient2Prefab = Instantiate(ingredients[1]);
                         ingredient2Prefab.transform.parent = ingredient2.transform;
@@ -48,24 +51,34 @@ public class PlayerInv : MonoBehaviour
         if (nearbyPots.Count() > 0 && interactAction.WasPressedThisFrame())
         {
             var closestPot = nearbyPots.First().gameObject.GetComponent<Pot>();
-            if (ingredients.Count > 0)
+            if (closestPot.readyToCollect)
             {
-                closestPot.ingredients.Add(ingredients[0]);
-                ingredients.RemoveAt(0);
+                recipePrefab = Instantiate(closestPot.currentObject);
+                recipePrefab.transform.parent = recipe.transform;
+                recipePrefab.transform.localPosition = Vector3.zero;
+                recipePrefab.transform.rotation = recipe.transform.rotation;
+            }
+            else
+            {
                 if (ingredients.Count > 0)
                 {
-                    Destroy(ingredient1Prefab);
-                    ingredient1Prefab = null;
-                }
-                else if(ingredient2Prefab != null)
-                {
-                    Destroy(ingredient2Prefab);
-                    ingredient2Prefab = null;
-                }
-                else
-                {
-                    Destroy(ingredient1Prefab);
-                    ingredient1Prefab = null;
+                    closestPot.ingredients.Add(ingredients[0]);
+                    ingredients.RemoveAt(0);
+                    if (ingredients.Count > 0)
+                    {
+                        Destroy(ingredient1Prefab);
+                        ingredient1Prefab = null;
+                    }
+                    else if (ingredient2Prefab != null)
+                    {
+                        Destroy(ingredient2Prefab);
+                        ingredient2Prefab = null;
+                    }
+                    else
+                    {
+                        Destroy(ingredient1Prefab);
+                        ingredient1Prefab = null;
+                    }
                 }
             }
         }

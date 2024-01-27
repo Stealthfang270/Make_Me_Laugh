@@ -236,11 +236,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &86756051 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2552907482816031161, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
-  m_PrefabInstance: {fileID: 4601839077587786303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &272793811
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +330,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &691791027 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2924471999366923385, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
+  m_PrefabInstance: {fileID: 4601839077587786303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &734999293
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +807,14 @@ MonoBehaviour:
   steakIngredients:
   - Steak
   - Ashes
-  steakTime: 0
+  steakTime: 2
+  steakObject: {fileID: 855528387388217558, guid: ab40a4cf236fe2043a0eabac595a59fe, type: 3}
+  sandwichObject: {fileID: 0}
+  pastaObject: {fileID: 0}
+  currentObject: {fileID: 0}
+  isCooking: 0
+  readyToCollect: 0
+  cookTime: 0
 --- !u!1 &1454616659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,11 +1169,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2096394812 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9065457541528974843, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
-  m_PrefabInstance: {fileID: 4601839077587786303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2110619169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,13 +1274,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 909325836, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
-      propertyPath: ingredient1
+      propertyPath: recipe
       value: 
-      objectReference: {fileID: 86756051}
-    - target: {fileID: 909325836, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
-      propertyPath: ingredient2
-      value: 
-      objectReference: {fileID: 2096394812}
+      objectReference: {fileID: 691791027}
     - target: {fileID: 4601839077284817973, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
       propertyPath: m_RootOrder
       value: 3

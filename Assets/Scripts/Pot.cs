@@ -20,6 +20,14 @@ public class Pot : MonoBehaviour
     public float pastaTime;
     public List<string> steakIngredients;
     public float steakTime;
+    public GameObject steakObject;
+    public GameObject sandwichObject;
+    public GameObject pastaObject;
+    public GameObject currentObject;
+
+    public bool isCooking;
+    public bool readyToCollect;
+    public float cookTime;
 
     private void Awake()
     {
@@ -43,17 +51,32 @@ public class Pot : MonoBehaviour
 
         ingredientNames = ingredients.Select(x => x.name).ToList();
 
-        if(ListEqual(ingredientNames, sandwich.ingredients))
+        if (ListEqual(ingredientNames, sandwich.ingredients) && !isCooking)
         {
-            Debug.Log("You made sandwich!");
+            isCooking = true;
+            cookTime = sandwich.cookTime;
+            currentObject = sandwichObject;
         }
-        if(ListEqual(ingredientNames, steak.ingredients))
+        if (ListEqual(ingredientNames, steak.ingredients) && !isCooking)
         {
-            Debug.Log("You made a steak!");
+            isCooking = true;
+            cookTime = steak.cookTime;
+            currentObject = steakObject;
         }
-        if (ListEqual(ingredientNames, pasta.ingredients))
+        if (ListEqual(ingredientNames, pasta.ingredients) && !isCooking)
         {
-            Debug.Log("You made pasta!");
+            isCooking = true;
+            cookTime = pasta.cookTime;
+            currentObject = pastaObject;
+        }
+
+        if(isCooking && cookTime > 0)
+        {
+            cookTime -= Time.deltaTime;
+        } else if (isCooking && cookTime < 0)
+        {
+            isCooking = false;
+            readyToCollect = true;
         }
     }
 
