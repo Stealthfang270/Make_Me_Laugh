@@ -951,11 +951,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1733423535 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4601839075932007312, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
-  m_PrefabInstance: {fileID: 4601839077587786303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1802803316 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2827595274272361183, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
@@ -1336,7 +1331,7 @@ PrefabInstance:
     - target: {fileID: 4601839077284817972, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
       propertyPath: playerModel
       value: 
-      objectReference: {fileID: 1733423535}
+      objectReference: {fileID: 4601839077587786304}
     - target: {fileID: 4601839077284817972, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
       propertyPath: camPivotPoint
       value: 
@@ -1397,6 +1392,10 @@ PrefabInstance:
       propertyPath: jumpPower
       value: 900
       objectReference: {fileID: 0}
+    - target: {fileID: 4601839077284817974, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 4601839077587786305}
     - target: {fileID: 4601839077284817974, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
       propertyPath: layerMask.m_Bits
       value: 55
@@ -1513,5 +1512,38 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7044709573438120854, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676392869722257708, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
+      propertyPath: m_Name
+      value: UpdatedPlayerModel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
+--- !u!1 &4601839077587786304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7676392869722257708, guid: 1a7125ebd7c8c3244a4c101d8c2184a0, type: 3}
+  m_PrefabInstance: {fileID: 4601839077587786303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4601839077587786305
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4601839077587786304}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22e4e3a1ff9369549b0b6117d503a052, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
