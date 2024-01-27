@@ -82,8 +82,8 @@ public class Pot : MonoBehaviour
 
     public bool ListEqual(List<string> list1, List<string> list2)
     {
-        list1.OrderBy(x => x);
-        list2.OrderBy(x => x);
+        list1.Sort();
+        list2.Sort();
 
         return list1.SequenceEqual(list2);
     }
