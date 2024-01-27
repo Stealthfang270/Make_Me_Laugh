@@ -790,8 +790,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredients: []
+  ingredientNames: []
   keyIndicator: {fileID: 1363709611}
   player: {fileID: 909325830}
+  sandwichIngredients:
+  - Tomato
+  - Bread
+  - Steak
+  - Ashes
+  sandwichTime: 0
+  pastaIngredients:
+  - Bread
+  - Milk
+  - ToxicWaste
+  pastaTime: 0
+  steakIngredients:
+  - Steak
+  - Ashes
+  steakTime: 0
 --- !u!1 &1454616659
 GameObject:
   m_ObjectHideFlags: 0
