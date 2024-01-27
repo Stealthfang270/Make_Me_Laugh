@@ -82,6 +82,49 @@ public class PlayerInv : MonoBehaviour
                 }
             }
         }
+
+
+        //Interact with customers
+
+        var nearbyCustomers = Physics.OverlapSphere(transform.position, radius).Where(x => x.GetComponent<Customer>() != null);
+        if(nearbyCustomers.Count() > 0 && interactAction.WasPressedThisFrame())
+        {
+            var closestCustomer = nearbyCustomers.First().gameObject.GetComponent<Customer>();
+            if(!closestCustomer.hasOrdered)
+            {
+                switch(closestCustomer.selectedOrder)
+                {
+                    case "Sandwich":
+                        var sandwich = Instantiate(closestCustomer.sandwich);
+                        sandwich.transform.parent = closestCustomer.orderShowcaseLocation.transform;
+                        sandwich.transform.localPosition = Vector3.zero;
+                        sandwich.transform.rotation = closestCustomer.orderShowcaseLocation.transform.rotation;
+                        break;
+                    case "Steak":
+                        var steak = Instantiate(closestCustomer.steak);
+                        steak.transform.parent = closestCustomer.orderShowcaseLocation.transform;
+                        steak.transform.localPosition = Vector3.zero;
+                        steak.transform.rotation = closestCustomer.orderShowcaseLocation.transform.rotation;
+                        break;
+                    case "Pasta":
+                        var pasta = Instantiate(closestCustomer.pasta);
+                        pasta.transform.parent = closestCustomer.orderShowcaseLocation.transform;
+                        pasta.transform.localPosition = Vector3.zero;
+                        pasta.transform.rotation = closestCustomer.orderShowcaseLocation.transform.rotation;
+                        break;
+                }
+                closestCustomer.hasOrdered = true;
+            } else if(recipePrefab != null)
+            {
+                string cutRecipePrefabName = recipePrefab.name.Replace("(Clone)", "");
+                if (cutRecipePrefabName == closestCustomer.selectedOrder)
+                {
+                    Destroy(closestCustomer.gameObject);
+                    Destroy(recipePrefab.gameObject);
+                    recipePrefab = null;
+                }
+            }
+        }
     }
 
     private void OnEnable()
