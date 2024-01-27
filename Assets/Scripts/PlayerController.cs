@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         targetXRotation = camPivot.transform.localRotation.x;
         targetYRotation = camPivot.transform.localRotation.y;
+        Physics.gravity *= 2;
     }
 
     // Update is called once per frame
