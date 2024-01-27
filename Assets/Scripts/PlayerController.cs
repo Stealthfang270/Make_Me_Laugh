@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     bool onGround = false;
     public float deccelRate = 1.1f;
     public float camDist = 5f;
+    public float groundDist = 4;
     
 
     void Start()
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
         if (Time.timeScale > 0)
         {
             moveValue = moveAction.ReadValue<Vector2>();
-            onGround = Physics.Raycast(playerModel.transform.position, Vector3.down, 1.5f);
+            onGround = Physics.Raycast(playerModel.transform.position, Vector3.down, groundDist);
 
             targetXRotation -= Input.GetAxis("Mouse Y") * rotateSpeed;
             targetYRotation += Input.GetAxis("Mouse X") * rotateSpeed;
