@@ -29,7 +29,7 @@ public class Launcher : MonoBehaviour
     public Transform GetHips(GameObject player)
     {
         var playerModelPos = player.transform.GetChild(0);
-        var ragdollPos = playerModelPos.transform.GetChild(1);
+        var ragdollPos = playerModelPos.transform.GetChild(2);
         if(ragdollPos.childCount > 0)
         {
             var ragdollPrefab = ragdollPos.transform.GetChild(0);
