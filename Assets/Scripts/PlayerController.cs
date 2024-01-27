@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         onGround = Physics.Raycast(playerModel.transform.position, Vector3.down, groundDist);
+        controller.SetBool("onGround", onGround);
         if (Time.timeScale > 0 && hasControl)
         {
             moveValue = moveAction.ReadValue<Vector2>();
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             cam.transform.position = hit.point + (-ray.direction.normalized * 0.3f);
         }
+        controller.SetFloat("Move", Mathf.Abs(new Vector2(rb.velocity.x, rb.velocity.z).magnitude));
     }
 
     private void FixedUpdate()
