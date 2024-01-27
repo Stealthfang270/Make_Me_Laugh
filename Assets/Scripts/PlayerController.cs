@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public float deccelRate = 1.1f;
     public float camDist = 5f;
     public float groundDist = 4;
+    public Animator controller;
     
 
     void Start()
@@ -71,10 +73,15 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+
         if(jumpAction.IsPressed() && onGround)
         {
+            controller.SetBool("Jumped", true);
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(jumpPower * Vector3.up);
+        } else
+        {
+            controller.SetBool("Jumped", false);
         }
     }
 
