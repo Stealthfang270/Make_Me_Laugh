@@ -25,12 +25,12 @@ public class PlayerController : MonoBehaviour
     public float maxMagnitude;
     float targetXRotation;
     float targetYRotation;
-    bool onGround = false;
+    public bool onGround = false;
     public float deccelRate = 1.1f;
     public float camDist = 5f;
     public float groundDist = 4;
     public Animator controller;
-    
+    public bool hasControl = true;
 
     void Start()
     {
@@ -43,10 +43,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale > 0)
+        onGround = Physics.Raycast(playerModel.transform.position, Vector3.down, groundDist);
+        if (Time.timeScale > 0 && hasControl)
         {
             moveValue = moveAction.ReadValue<Vector2>();
-            onGround = Physics.Raycast(playerModel.transform.position, Vector3.down, groundDist);
 
             targetXRotation -= Input.GetAxis("Mouse Y") * rotateSpeed;
             targetYRotation += Input.GetAxis("Mouse X") * rotateSpeed;
@@ -54,19 +54,21 @@ public class PlayerController : MonoBehaviour
 
             camPivot.transform.eulerAngles = new Vector3(targetXRotation, camPivot.transform.eulerAngles.y, camPivot.transform.eulerAngles.z);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, targetYRotation, transform.eulerAngles.z);
-
-            //Prevent camera from passing through walls
-            RaycastHit hit;
-            Ray ray = new Ray(camPivot.transform.position, cam.transform.position - camPivot.transform.position);
-            Physics.Raycast(ray, out hit, camDist, layerMask);
-            if (hit.collider == null)
-            {
-                cam.transform.position = camPivot.transform.position - camPivot.transform.forward * camDist;
-            }
-            else
-            {
-                cam.transform.position = hit.point + (-ray.direction.normalized * 0.3f);
-            }
+        } else
+        {
+            moveValue = new Vector2();
+        }
+        //Prevent camera from passing through walls
+        RaycastHit hit;
+        Ray ray = new Ray(camPivot.transform.position, cam.transform.position - camPivot.transform.position);
+        Physics.Raycast(ray, out hit, camDist, layerMask);
+        if (hit.collider == null)
+        {
+            cam.transform.position = camPivot.transform.position - camPivot.transform.forward * camDist;
+        }
+        else
+        {
+            cam.transform.position = hit.point + (-ray.direction.normalized * 0.3f);
         }
     }
 
@@ -74,12 +76,13 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
 
-        if(jumpAction.IsPressed() && onGround)
+        if (jumpAction.IsPressed() && onGround && hasControl)
         {
             controller.SetBool("Jumped", true);
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(jumpPower * Vector3.up);
-        } else
+        }
+        else
         {
             controller.SetBool("Jumped", false);
         }
@@ -88,19 +91,19 @@ public class PlayerController : MonoBehaviour
     public void Movement()
     {
         rb.AddRelativeForce(new Vector3(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed));
-        if(moveValue.x == 0)
+        if (moveValue.x == 0)
         {
             var localVelocity = transform.InverseTransformDirection(rb.velocity);
             localVelocity = new Vector3(localVelocity.x / deccelRate, localVelocity.y, localVelocity.z);
             rb.velocity = transform.TransformDirection(localVelocity);
         }
-        if(moveValue.y == 0)
+        if (moveValue.y == 0)
         {
             var localVelocity = transform.InverseTransformDirection(rb.velocity);
             localVelocity = new Vector3(localVelocity.x, localVelocity.y, localVelocity.z / deccelRate);
             rb.velocity = transform.TransformDirection(localVelocity);
         }
-        if(new Vector2(rb.velocity.x, rb.velocity.z).magnitude > maxMagnitude)
+        if (new Vector2(rb.velocity.x, rb.velocity.z).magnitude > maxMagnitude)
         {
             var clampedVelocity = Vector2.ClampMagnitude(new Vector2(rb.velocity.x, rb.velocity.z), maxMagnitude);
             rb.velocity = new Vector3(clampedVelocity.x, rb.velocity.y, clampedVelocity.y);
