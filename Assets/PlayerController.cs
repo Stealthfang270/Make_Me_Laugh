@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     //Inputs
     public InputAction moveAction;
     public InputAction jumpAction;
-    public Vector2 moveValue;
+    Vector2 moveValue;
 
     //Components
     public GameObject playerModel;
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     float targetXRotation;
     float targetYRotation;
     bool onGround = false;
+    float deccelRate = 1.1f;
 
     void Start()
     {
@@ -46,5 +47,49 @@ public class PlayerController : MonoBehaviour
             camPivot.transform.eulerAngles = new Vector3(targetXRotation, camPivot.transform.eulerAngles.y, camPivot.transform.eulerAngles.z);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, targetYRotation, transform.eulerAngles.z);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        Movement();
+        if(jumpAction.IsPressed() && onGround)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(jumpPower * Vector3.up);
+        }
+    }
+
+    public void Movement()
+    {
+        rb.AddRelativeForce(new Vector3(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed));
+        if(moveValue.x == 0)
+        {
+            var localVelocity = transform.InverseTransformDirection(rb.velocity);
+            localVelocity = new Vector3(localVelocity.x / deccelRate, localVelocity.y, localVelocity.z);
+            rb.velocity = transform.TransformDirection(localVelocity);
+        }
+        if(moveValue.y == 0)
+        {
+            var localVelocity = transform.InverseTransformDirection(rb.velocity);
+            localVelocity = new Vector3(localVelocity.x, localVelocity.y, localVelocity.z / deccelRate);
+            rb.velocity = transform.TransformDirection(localVelocity);
+        }
+        if(new Vector2(rb.velocity.x, rb.velocity.z).magnitude > maxMagnitude)
+        {
+            var clampedVelocity = Vector2.ClampMagnitude(new Vector2(rb.velocity.x, rb.velocity.z), maxMagnitude);
+            rb.velocity = new Vector3(clampedVelocity.x, rb.velocity.y, clampedVelocity.y);
+        }
+    }
+
+    private void OnEnable()
+    {
+        moveAction.Enable();
+        jumpAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        moveAction.Disable();
+        jumpAction.Disable();
     }
 }
