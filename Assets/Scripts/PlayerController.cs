@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        onGround = Physics.Raycast(playerModel.transform.position, Vector3.down, groundDist);
+        onGround = Physics.BoxCast(playerModel.transform.position, new Vector3(1,0.1f,1) * 2, Vector3.down, Quaternion.identity, groundDist);
         controller.SetBool("onGround", onGround);
         if (Time.timeScale > 0 && hasControl)
         {
