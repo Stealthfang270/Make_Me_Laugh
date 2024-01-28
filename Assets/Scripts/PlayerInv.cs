@@ -16,6 +16,8 @@ public class PlayerInv : MonoBehaviour
     public GameObject recipe;
     public GameObject recipePrefab;
 
+    public GameObject teleportOnDeath;
+
     private void Update()
     {
         //Interact with ingredients
@@ -124,6 +126,27 @@ public class PlayerInv : MonoBehaviour
                     recipePrefab = null;
                 }
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "DeathPlane")
+        {
+            ingredients.Clear();
+            if(ingredient1Prefab != null)
+            {
+                Destroy(ingredient1Prefab.gameObject);
+                ingredient1Prefab = null;
+            }
+            if(ingredient2Prefab != null)
+            {
+                Destroy(ingredient2Prefab.gameObject);
+                ingredient2Prefab = null;
+            }
+
+            transform.position = teleportOnDeath.transform.position;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
 
