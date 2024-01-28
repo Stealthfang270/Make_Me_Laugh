@@ -1,3 +1,4 @@
+using MagicPigGames;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,9 @@ public class Pot : MonoBehaviour
 
     public float explodeTimeLeft = 30;
     public float maxExplodeTime = 30;
+
+    public HorizontalProgressBar bar;
+    public GameObject progressBarCanvas;
 
     private void Awake()
     {
@@ -73,19 +77,20 @@ public class Pot : MonoBehaviour
             currentObject = pastaObject;
         }
 
-        if(isCooking && cookTime > 0)
+        if (isCooking && cookTime > 0)
         {
             cookTime -= Time.deltaTime;
-        } else if (isCooking && cookTime < 0)
+        }
+        else if (isCooking && cookTime < 0)
         {
             isCooking = false;
             readyToCollect = true;
         }
 
-        if(ingredients.Count > 0)
+        if (ingredients.Count > 0)
         {
             explodeTimeLeft -= Time.deltaTime;
-            if(explodeTimeLeft < 0)
+            if (explodeTimeLeft < 0)
             {
                 explodeTimeLeft = maxExplodeTime;
                 if (Vector3.Distance(transform.position, player.transform.position) < 10)
@@ -96,13 +101,23 @@ public class Pot : MonoBehaviour
                 foreach (Collider collider in nearbyObjects)
                 {
                     Rigidbody rb = collider.GetComponent<Rigidbody>();
-                    if(rb != null)
+                    if (rb != null)
                     {
                         rb.AddExplosionForce(10000, transform.position, 10, 5000);
                     }
                 }
                 ingredients.Clear();
             }
+        }
+
+        if (isCooking)
+        {
+            progressBarCanvas.SetActive(true);
+            bar.SetProgress(Mathf.Clamp01(cookTime / steakTime));
+        }
+        else
+        {
+            progressBarCanvas.SetActive(false);
         }
     }
 
