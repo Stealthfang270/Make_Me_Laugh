@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
 
     public int difficulty = 0;
-    public float increaseDifficultyTime = 30;
-    public float timeUntilNextDifficultyIncrease = 30;
+    public float increaseDifficultyTime = 60;
+    public float timeUntilNextDifficultyIncrease = 60;
     private void Update()
     {
         if (timeUntilNextDifficultyIncrease > 0)

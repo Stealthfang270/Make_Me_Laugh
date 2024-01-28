@@ -113,6 +113,10 @@ public class Pot : MonoBehaviour
                 ingredients.Clear();
             }
         }
+        else
+        {
+            explodeTimeLeft = maxExplodeTime;
+        }
 
         if (isCooking)
         {
