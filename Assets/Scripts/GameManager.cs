@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         {
             LifeTracker.life = 5;
             LifeTracker.difficulty = 0;
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("GameOver");
         }
     }
