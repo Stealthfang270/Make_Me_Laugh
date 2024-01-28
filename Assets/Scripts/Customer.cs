@@ -28,6 +28,7 @@ public class Customer : MonoBehaviour
 
         if(timeUntilAngry < 0)
         {
+            LifeTracker.life -= 1;
             Destroy(gameObject);
         }
     }
