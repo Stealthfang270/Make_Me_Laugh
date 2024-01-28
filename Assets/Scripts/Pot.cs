@@ -29,6 +29,9 @@ public class Pot : MonoBehaviour
     public bool readyToCollect;
     public float cookTime;
 
+    public float explodeTimeLeft = 30;
+    public float maxExplodeTime = 30;
+
     private void Awake()
     {
         sandwich = new Recipe();
@@ -77,6 +80,29 @@ public class Pot : MonoBehaviour
         {
             isCooking = false;
             readyToCollect = true;
+        }
+
+        if(ingredients.Count > 0)
+        {
+            explodeTimeLeft -= Time.deltaTime;
+            if(explodeTimeLeft < 0)
+            {
+                explodeTimeLeft = maxExplodeTime;
+                if (Vector3.Distance(transform.position, player.transform.position) < 10)
+                {
+                    player.GetComponent<RagdollSpawner>().RagDoll();
+                }
+                var nearbyObjects = Physics.OverlapSphere(transform.position, 10);
+                foreach (Collider collider in nearbyObjects)
+                {
+                    Rigidbody rb = collider.GetComponent<Rigidbody>();
+                    if(rb != null)
+                    {
+                        rb.AddExplosionForce(10000, transform.position, 10, 5000);
+                    }
+                }
+                ingredients.Clear();
+            }
         }
     }
 

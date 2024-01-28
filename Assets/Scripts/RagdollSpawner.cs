@@ -26,19 +26,7 @@ public class RagdollSpawner : MonoBehaviour
     {
         if(collision.gameObject.tag == "Hazard" && playerModel.activeInHierarchy)
         {
-            playerModel.SetActive(false);
-            ragInst = Instantiate(ragdollPrefab, ragdollParent.transform);
-            ragInst.transform.localPosition = Vector3.zero;
-            ragInst.transform.rotation = ragdollParent.transform.rotation;
-            playerController.hasControl = false;
-            
-            //Set camera to follow ragdoll
-            var armature = ragInst.transform.GetChild(0);
-            var hips = armature.GetChild(0);
-            camPivotPoint.transform.parent = hips.transform;
-            inRagdoll = true;
-
-            getUpTimeLeft = getUpTime;
+            RagDoll();
         }
     }
 
@@ -68,5 +56,22 @@ public class RagdollSpawner : MonoBehaviour
         playerController.hasControl = true;
         inRagdoll = false;
         camPivotPoint.transform.localPosition = camOriginalPos;
+    }
+
+    public void RagDoll()
+    {
+        playerModel.SetActive(false);
+        ragInst = Instantiate(ragdollPrefab, ragdollParent.transform);
+        ragInst.transform.localPosition = Vector3.zero;
+        ragInst.transform.rotation = ragdollParent.transform.rotation;
+        playerController.hasControl = false;
+
+        //Set camera to follow ragdoll
+        var armature = ragInst.transform.GetChild(0);
+        var hips = armature.GetChild(0);
+        camPivotPoint.transform.parent = hips.transform;
+        inRagdoll = true;
+
+        getUpTimeLeft = getUpTime;
     }
 }
