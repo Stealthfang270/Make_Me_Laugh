@@ -1024,7 +1024,7 @@ MonoBehaviour:
   - Steak
   - Sandwich
   - Pasta
-  timeUntilAngry: 10
+  timeUntilAngry: 90
   selectedOrder: 
   hasOrdered: 0
   sandwich: {fileID: 855528387388217558, guid: b3912999a03745d46a13308bfdbe89a8, type: 3}
