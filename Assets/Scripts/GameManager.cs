@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
         LifeTracker.difficulty = difficulty;
 
+        Debug.Log("Difficulty: " + LifeTracker.difficulty);
+        Debug.Log("Lives: " + LifeTracker.life);
+
 
         if (LifeTracker.life <= 0)
         {
