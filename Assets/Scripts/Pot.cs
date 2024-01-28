@@ -54,19 +54,19 @@ public class Pot : MonoBehaviour
 
         ingredientNames = ingredients.Select(x => x.name).ToList();
 
-        if (ListEqual(ingredientNames, sandwich.ingredients) && !isCooking)
+        if (ListEqual(ingredientNames, sandwich.ingredients) && !isCooking && !readyToCollect)
         {
             isCooking = true;
             cookTime = sandwich.cookTime;
             currentObject = sandwichObject;
         }
-        if (ListEqual(ingredientNames, steak.ingredients) && !isCooking)
+        if (ListEqual(ingredientNames, steak.ingredients) && !isCooking && !readyToCollect)
         {
             isCooking = true;
             cookTime = steak.cookTime;
             currentObject = steakObject;
         }
-        if (ListEqual(ingredientNames, pasta.ingredients) && !isCooking)
+        if (ListEqual(ingredientNames, pasta.ingredients) && !isCooking && !readyToCollect)
         {
             isCooking = true;
             cookTime = pasta.cookTime;

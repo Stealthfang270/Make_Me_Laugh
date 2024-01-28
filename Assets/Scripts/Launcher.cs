@@ -14,8 +14,11 @@ public class Launcher : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-            rb.AddForce(direction * power);
+            if (!collision.gameObject.GetComponent<RagdollSpawner>().inRagdoll || launchRagdoll)
+            {
+                Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+                rb.AddForce(direction * power);
+            }
 
             if(launchRagdoll)
             {

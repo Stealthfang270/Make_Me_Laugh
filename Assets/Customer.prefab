@@ -1022,9 +1022,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderNames:
   - Steak
-  - Sandwich
-  - Pasta
-  timeUntilAngry: 100
+  - sandwich
+  - SPAGHETTI
+  timeUntilAngry: 300
+  lowestTimeUntilAngry: 180
   selectedOrder: 
   hasOrdered: 0
   sandwich: {fileID: 919132149155446097, guid: f4449b0557c47f14c9c0481b8c19e3c6, type: 3}

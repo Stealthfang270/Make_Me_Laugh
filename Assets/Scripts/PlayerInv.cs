@@ -59,6 +59,9 @@ public class PlayerInv : MonoBehaviour
                 recipePrefab.transform.parent = recipe.transform;
                 recipePrefab.transform.localPosition = Vector3.zero;
                 recipePrefab.transform.rotation = recipe.transform.rotation;
+                closestPot.ingredients.Clear();
+                closestPot.readyToCollect = false;
+                closestPot.isCooking = false;
             }
             else
             {
@@ -96,7 +99,7 @@ public class PlayerInv : MonoBehaviour
             {
                 switch(closestCustomer.selectedOrder)
                 {
-                    case "Sandwich":
+                    case "sandwich":
                         var sandwich = Instantiate(closestCustomer.sandwich);
                         sandwich.transform.parent = closestCustomer.orderShowcaseLocation.transform;
                         sandwich.transform.localPosition = Vector3.zero;
@@ -108,7 +111,7 @@ public class PlayerInv : MonoBehaviour
                         steak.transform.localPosition = Vector3.zero;
                         steak.transform.rotation = closestCustomer.orderShowcaseLocation.transform.rotation;
                         break;
-                    case "Pasta":
+                    case "SPAGHETTI":
                         var pasta = Instantiate(closestCustomer.pasta);
                         pasta.transform.parent = closestCustomer.orderShowcaseLocation.transform;
                         pasta.transform.localPosition = Vector3.zero;
@@ -124,6 +127,12 @@ public class PlayerInv : MonoBehaviour
                     Destroy(closestCustomer.gameObject);
                     Destroy(recipePrefab.gameObject);
                     recipePrefab = null;
+                } else
+                {
+                    Destroy(closestCustomer.gameObject);
+                    Destroy(recipePrefab.gameObject);
+                    recipePrefab = null;
+                    LifeTracker.life -= 1;
                 }
             }
         }

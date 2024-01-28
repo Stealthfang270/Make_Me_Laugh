@@ -5,7 +5,8 @@ using UnityEngine;
 public class Customer : MonoBehaviour
 {
     public List<string> orderNames;
-    public float timeUntilAngry = 10;
+    public float timeUntilAngry = 200;
+    public float lowestTimeUntilAngry = 100;
     public string selectedOrder;
     public bool hasOrdered;
     public GameObject sandwich;
@@ -17,7 +18,7 @@ public class Customer : MonoBehaviour
     {
         int rand = Random.Range(0, orderNames.Count);
         selectedOrder = orderNames[rand];
-        timeUntilAngry = Mathf.Max(timeUntilAngry - 3 * LifeTracker.difficulty, 50);
+        timeUntilAngry = Mathf.Max(timeUntilAngry - 5 * LifeTracker.difficulty, lowestTimeUntilAngry);
     }
 
     private void Update()
