@@ -32,6 +32,12 @@ public class PlayerController : MonoBehaviour
     public Animator controller;
     public bool hasControl = true;
 
+    public AudioSource landSrc;
+    public AudioSource walkSrc;
+
+    public float walkIncrements = 0.8f;
+    float walkTime = 0.5f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,7 +49,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var onGroundLastFrame = onGround;
         onGround = Physics.BoxCast(playerModel.transform.position, new Vector3(1,0.1f,1) * 2, Vector3.down, Quaternion.identity, groundDist);
+        if(!onGroundLastFrame && onGround)
+        {
+            landSrc.Play();
+        }
         controller.SetBool("onGround", onGround);
         if (Time.timeScale > 0 && hasControl)
         {
@@ -72,6 +83,16 @@ public class PlayerController : MonoBehaviour
             cam.transform.position = hit.point + (-ray.direction.normalized * 0.3f);
         }
         controller.SetFloat("Move", Mathf.Abs(new Vector2(rb.velocity.x, rb.velocity.z).magnitude));
+
+        if(Mathf.Abs(new Vector2(rb.velocity.x, rb.velocity.z).magnitude) > 0.4 && onGround)
+        {
+            walkTime -= Time.deltaTime;
+            if(walkTime <= 0)
+            {
+                walkTime = walkIncrements;
+                walkSrc.Play();
+            }
+        }
     }
 
     private void FixedUpdate()

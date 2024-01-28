@@ -1031,7 +1031,7 @@ MonoBehaviour:
   selectedOrder: 
   hasOrdered: 0
   sandwich: {fileID: 919132149155446097, guid: f4449b0557c47f14c9c0481b8c19e3c6, type: 3}
-  steak: {fileID: 855528387388217558, guid: 84486abd96dd23b48bbad9016d7cae00, type: 3}
+  steak: {fileID: 919132149155446097, guid: 538fb9b873edcda4dbff33a9939f402e, type: 3}
   pasta: {fileID: 919132149155446097, guid: 2bcfce85bcc12d54a86a0a604f8677b8, type: 3}
   orderShowcaseLocation: {fileID: 1983081315025487964}
   bar: {fileID: 1959371261094291124}
