@@ -36,6 +36,9 @@ public class Pot : MonoBehaviour
     public HorizontalProgressBar bar;
     public GameObject progressBarCanvas;
 
+    public GameObject explosionPrefab;
+    public AudioSource cookSounds;
+
     private void Awake()
     {
         sandwich = new Recipe();
@@ -80,11 +83,16 @@ public class Pot : MonoBehaviour
         if (isCooking && cookTime > 0)
         {
             cookTime -= Time.deltaTime;
+            if(!cookSounds.isPlaying)
+            {
+                cookSounds.Play();
+            }
         }
         else if (isCooking && cookTime < 0)
         {
             isCooking = false;
             readyToCollect = true;
+            cookSounds.Stop();
         }
 
         if (ingredients.Count > 0)
@@ -98,6 +106,8 @@ public class Pot : MonoBehaviour
                     player.GetComponent<RagdollSpawner>().RagDoll();
                 }
                 var nearbyObjects = Physics.OverlapSphere(transform.position, 10);
+                var explode = Instantiate(explosionPrefab);
+                explode.transform.position = transform.position;
                 foreach (Collider collider in nearbyObjects)
                 {
                     Rigidbody rb = collider.GetComponent<Rigidbody>();
