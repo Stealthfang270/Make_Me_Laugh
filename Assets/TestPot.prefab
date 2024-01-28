@@ -136,3 +136,5 @@ MonoBehaviour:
   isCooking: 0
   readyToCollect: 0
   cookTime: 0
+  explodeTimeLeft: 45
+  maxExplodeTime: 45

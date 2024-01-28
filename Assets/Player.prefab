@@ -2259,7 +2259,7 @@ MonoBehaviour:
       m_Action: Interact
       m_Flags: 0
     m_Flags: 0
-  radius: 2
+  radius: 3
   ingredients: []
   ingredient1: {fileID: 2552907482816031161}
   ingredient1Prefab: {fileID: 0}

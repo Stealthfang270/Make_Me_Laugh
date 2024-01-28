@@ -1419,14 +1419,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 909325830}
-    - target: {fileID: 1803079364534794184, guid: 39995c31a36f1e34ca397d9efdcdf926, type: 3}
-      propertyPath: maxExplodeTime
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 1803079364534794184, guid: 39995c31a36f1e34ca397d9efdcdf926, type: 3}
-      propertyPath: explodeTimeLeft
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 1803079364534794185, guid: 39995c31a36f1e34ca397d9efdcdf926, type: 3}
       propertyPath: m_RootOrder
       value: 9
