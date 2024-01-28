@@ -17,6 +17,7 @@ public class Customer : MonoBehaviour
     {
         int rand = Random.Range(0, orderNames.Count);
         selectedOrder = orderNames[rand];
+        timeUntilAngry = Mathf.Max(timeUntilAngry - 3 * LifeTracker.difficulty, 50);
     }
 
     private void Update()
