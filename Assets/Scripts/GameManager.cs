@@ -29,8 +29,9 @@ public class GameManager : MonoBehaviour
 
         if (LifeTracker.life <= 0)
         {
-            //SceneManager.LoadScene("LoseScreen");
-            Debug.Log("You suck lmao");
+            LifeTracker.life = 5;
+            LifeTracker.difficulty = 0;
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
