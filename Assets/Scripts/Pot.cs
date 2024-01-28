@@ -37,7 +37,6 @@ public class Pot : MonoBehaviour
     public GameObject progressBarCanvas;
 
     public GameObject explosionPrefab;
-    public AudioSource cookSounds;
 
     private void Awake()
     {
@@ -83,16 +82,11 @@ public class Pot : MonoBehaviour
         if (isCooking && cookTime > 0)
         {
             cookTime -= Time.deltaTime;
-            if(!cookSounds.isPlaying)
-            {
-                cookSounds.Play();
-            }
         }
         else if (isCooking && cookTime < 0)
         {
             isCooking = false;
             readyToCollect = true;
-            cookSounds.Stop();
         }
 
         if (ingredients.Count > 0)
